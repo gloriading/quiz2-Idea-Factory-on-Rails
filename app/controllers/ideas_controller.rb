@@ -8,7 +8,7 @@ class IdeasController < ApplicationController
   def create
     @idea = Idea.new idea_params
     if @idea.save
-      redirect_to idea_path(@idea)
+      redirect_to ideas_path
     else
       render :new
     end
@@ -19,7 +19,9 @@ class IdeasController < ApplicationController
   end
 
   def show
-
+    @review = Review.new
+    # @reviews = @idea.reviews.order(created_at: :desc) #mine
+    @reviews = @idea.reviews.order(created_at: :desc)
   end
 
   def edit
@@ -37,7 +39,7 @@ class IdeasController < ApplicationController
     @idea.destroy
     redirect_to ideas_path
   end
-  
+
 private
 
   def idea_params
@@ -47,4 +49,5 @@ private
   def find_idea
     @idea = Idea.find params[:id]
   end
+
 end

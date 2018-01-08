@@ -17,4 +17,43 @@
      )
   %>
 
+  <hr>
+
+  <h2>Reviews</h2>
+  <%= form_for [@idea, @review] do |f| %>
+    <% if @review.errors.present? %>
+      <p>
+        <%= @review.errors.full_messages.join(', ') %>
+      </p>
+    <% end %>
+
+    <div>
+      <%= f.text_area :body %>
+    </div>
+
+    <%= f.submit %>
+  <% end %>
+  <hr>
+
+    <div>
+        <% @reviews.each do |review| %>
+
+            <p><%= review.body %></p>
+
+            <p>
+              <strong>Created At:</strong>
+              <%= time_ago_in_words(review.created_at) %> ago
+            </p>
+
+            <%= link_to(
+              'Delete',
+              idea_review_path(@idea, review),
+              data: {confirm: 'Are you sure?'},
+              method: :delete
+            ) %>
+
+        <% end %>
+    </div>
+
+
 </div>
