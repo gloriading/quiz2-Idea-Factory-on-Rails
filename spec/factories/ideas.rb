@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :idea do
-    title "MyString"
-    description "MyText"
+    association :user, factory: :user
+    sequence(:title) { |n| "#{Faker::ChuckNorris.fact} - #{n}" }
+    description { Faker::Lorem.paragraph }
+
   end
 end
