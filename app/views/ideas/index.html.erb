@@ -2,8 +2,11 @@
   <h3>All Ideas</h3>
   <% @ideas.each do |idea| %>
     <div>
-      <h5><%= link_to idea.title, idea_path(idea) %></h5>
+      <h5><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle hide"></i>
+          <%= link_to idea.title, idea_path(idea) %></h5>
+      <p class="hide"><%= idea.description %></p>
       <hr>
+
     </div>
   <% end %>
 

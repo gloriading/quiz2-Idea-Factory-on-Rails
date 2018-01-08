@@ -17,9 +17,12 @@
      margin: 0;
      height: 100%;
  }
- // body{
- //   padding-bottom: 70px;
- // }
+ .hide {
+   display: none !important;
+ }
+ .show{
+   display: default !important;
+ }
 
 @import 'bootstrap';
 @import 'font-awesome';
