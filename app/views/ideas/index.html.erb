@@ -29,9 +29,16 @@
           <p class="card-text"> <%= idea.description %> </p>
             <i class="fa fa-user-o"></i><small>  <%= idea.user.full_name %></small>
             <a href="#" class="btn btn-outline-warning btn-sm">Join</a>
-            <a href="#" class="btn btn-outline-danger btn-sm">Like</a>
 
-            <small class="float-right">Member: | Like:</small>
+            <% if user_signed_in? && idea.liked_by?(current_user) %>
+              <%= link_to "Remove Like", idea_like_path(idea, idea.like_for(current_user)), class: "btn btn-outline-dark btn-sm", method: :delete %>
+            <% else %>
+              <%= link_to "Like", idea_likes_path(idea), class: "btn btn-outline-danger btn-sm", method: :post   %>
+            <% end %>
+
+            <small class="float-right">Member: | Like:<%= idea.likes.count %></small>
+
+
 
         </div>
       </div>
