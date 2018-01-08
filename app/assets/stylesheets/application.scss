@@ -17,17 +17,17 @@
      margin: 0;
      height: 100%;
  }
-
- .bg-basic {
-  height: 100%;
-  background-repeat:no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
+body{
+  padding-bottom: 70px;
 }
-  .bg-welcome {
-    background-image: url("https://images.pexels.com/photos/316465/pexels-photo-316465.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
-  }
+ .bg-01 {
+   height: 100%;
+   background-image: url("https://images.pexels.com/photos/7369/startup-photos.jpg?w=940&h=650&auto=compress&cs=tinysrgb");
+   background-repeat:no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+   background-position: center;
+ }
 
  .hide {
    display: none !important;

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :ideas do
     resources :reviews
     resources :likes, only: [:create, :destroy]
+    resources :joins, only: [:create, :destroy]
   end
 
   resources :users, only: [:new, :create]
