@@ -19,6 +19,7 @@ class IdeasController < ApplicationController
   end
 
   def index
+    @idea = Idea.new
     @ideas = Idea.all.order(created_at: :desc)
   end
 

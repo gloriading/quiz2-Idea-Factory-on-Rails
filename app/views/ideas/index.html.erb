@@ -1,14 +1,41 @@
 <div class="container mt-3">
-  <h3>All Ideas</h3>
-  <% @ideas.each do |idea| %>
-    <div>
-      <h5><i class="fa fa-plus-circle"></i><i class="fa fa-minus-circle hide"></i>
-          <%= link_to idea.title, idea_path(idea) %></h5>
-      <p class="hide"><%= idea.description %></p>
-      <hr>
+  <h3>Great Ideas</h3>
+  <div class="text-right">
+    <button type="button" class="btn btn-outline-secondary btn-sm mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">New Question</button>
+  </div>
 
-    </div>
-  <% end %>
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="container p-3">
+              <h5>New form</h5>
+                <%= render 'form' %>
+            </div>
 
+          </div>
+        </div>
+      </div>
 
+  <div class="frame">
+
+    <% @ideas.each do |idea| %>
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-plus-circle"></i>
+          <i class="fa fa-minus-circle hide"></i>
+          <%= link_to idea.title, idea_path(idea), class: "linkStyle" %>
+        </div>
+        <div class="card-body hide">
+          <p class="card-text"> <%= idea.description %> </p>
+            <i class="fa fa-user-o"></i><small>  <%= idea.user.full_name %></small>
+            <a href="#" class="btn btn-outline-warning btn-sm">Join</a>
+            <a href="#" class="btn btn-outline-danger btn-sm">Like</a>
+
+            <small class="float-right">Member: | Like:</small>
+
+        </div>
+      </div>
+    <% end %>
+
+  </div>
 </div>
