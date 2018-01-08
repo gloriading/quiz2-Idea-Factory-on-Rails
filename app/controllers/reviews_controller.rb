@@ -1,11 +1,13 @@
 class ReviewsController < ApplicationController
+    before_action :authenticate_user!
     before_action :find_idea
     before_action :find_review, only: [:destroy]
-
+    before_action :authorize_user!, only: [:destroy]
 
   def create
     @review = Review.new(review_params)
     @review.idea = @idea
+    @review.user = current_user
     if @review.save
       redirect_to idea_path(@idea)
     else
@@ -33,6 +35,11 @@ class ReviewsController < ApplicationController
     @review = Review.find params[:id]
   end
 
-
+  def authorize_user!
+    unless can?(:manage, @review)
+      flash[:alert] = "Access Denied!"
+      redirect_to home_path
+    end
+  end
 
 end

@@ -30,7 +30,8 @@ puts Cowsay.say("Create #{users.count} users", :tux)
 100.times do
   Idea.create(
     title: Faker::Coffee.blend_name,
-    description: Faker::Lorem.paragraph
+    description: Faker::Lorem.paragraph,
+    user: users.sample
   )
 end
 
@@ -41,7 +42,8 @@ ideas.each do |idea|
   rand(1..5).times.each do
     Review.create(
       body: Faker::TheFreshPrinceOfBelAir.quote,
-      idea: idea
+      idea: idea,
+      user: users.sample
     )
   end
 end

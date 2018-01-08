@@ -2,21 +2,20 @@
 
   <h2><%= @idea.title %></h2>
   <p><%= @idea.description %></p>
-
-
-
+  <p>By: <%= @idea.user&.full_name || "[deleted]" %></p>
   <p><strong>Created at: </strong> <%= time_ago_in_words(@idea.created_at) %> ago</p>
   <p><strong>Update at: </strong> <%= time_ago_in_words(@idea.updated_at) %> ago</p>
 
-  <%= link_to 'Edit', edit_idea_path(@idea) %>
-  <%= link_to(
-       'Delete',
-       idea_path(@idea),
-       method: :delete,
-       data: {confirm: 'Are you sure?'}
-     )
-  %>
-
+  <% if can?(:manage,@idea) %>
+    <%= link_to 'Edit', edit_idea_path(@idea) %>
+    <%= link_to(
+         'Delete',
+         idea_path(@idea),
+         method: :delete,
+         data: {confirm: 'Are you sure?'}
+       )
+    %>
+  <% end %>
   <hr>
 
   <h2>Reviews</h2>
@@ -39,19 +38,19 @@
         <% @reviews.each do |review| %>
 
             <p><%= review.body %></p>
-
+            <p>By:<%= review.user&.full_name || "[deleted]" %></p>
             <p>
               <strong>Created At:</strong>
               <%= time_ago_in_words(review.created_at) %> ago
             </p>
-
-            <%= link_to(
-              'Delete',
-              idea_review_path(@idea, review),
-              data: {confirm: 'Are you sure?'},
-              method: :delete
-            ) %>
-
+            <% if can?(:destroy, review) %>
+              <%= link_to(
+                'Delete',
+                idea_review_path(@idea, review),
+                data: {confirm: 'Are you sure?'},
+                method: :delete
+              ) %>
+            <% end %>
         <% end %>
     </div>
 
