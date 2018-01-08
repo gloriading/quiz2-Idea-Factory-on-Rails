@@ -7,8 +7,11 @@ Added Bootstrap
 (on branch idea)
 > rails g rspec:install
 
-> reals g controller welcome --no-assets --no-helper
-* welcome controller : home page
 
+* welcome controller : home page
+> reals g controller welcome --no-assets --no-helper
+
+
+* idea model and ideas controller : crud
 > rails g model idea title description:text
->
+> rails g controller ideas --no-helper --no-assets

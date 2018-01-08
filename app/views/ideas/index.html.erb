@@ -1,0 +1,10 @@
+<div class="container mt-3">
+  <h3>All Ideas</h3>
+  <% @ideas.each do |idea| %>
+    <div>
+      <h5><%= link_to idea.title, idea_path(idea) %></h5>
+      <hr>
+    </div>
+  <% end %>
+
+</div>
