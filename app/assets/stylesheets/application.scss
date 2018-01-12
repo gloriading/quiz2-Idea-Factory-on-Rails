@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+ body, html {
+     margin: 0;
+     height: 100%;
+ }
+body{
+  padding-bottom: 70px;
+}
+ .bg-01 {
+   height: 100%;
+   background-image: url("https://images.pexels.com/photos/7369/startup-photos.jpg?w=940&h=650&auto=compress&cs=tinysrgb");
+   background-repeat:no-repeat;
+   background-size: cover;
+   background-attachment: fixed;
+   background-position: center;
+ }
+
+ .hide {
+   display: none !important;
+ }
+ .show{
+   display: default !important;
+ }
+ .linkStyle {
+   text-decoration: none !important;
+   color:navy;
+   font-size: 20px;
+ }
+@import 'bootstrap';
+@import 'font-awesome';

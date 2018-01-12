@@ -1,0 +1,72 @@
+<div class="container mt-3">
+  <h3>Great Ideas</h3>
+
+<%# Only signed-in users can see this new form button -----------------------%>
+<% if user_signed_in? %>
+
+  <div class="text-right">
+    <button type="button" class="btn btn-outline-secondary btn-sm mb-3" data-toggle="modal" data-target=".bd-example-modal-lg">New Question</button>
+  </div>
+
+<%# add ` data-backdrop="static" data-keyboard="false" ` to prevent from clicking
+on area outside of the pop-up, the pop-up fades out %>
+      <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content pr-3 pt-3">
+            <p class"text-right">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </p>
+            <div class="container p-3">
+
+              <h5>New Idea</h5>
+                <%= render 'form' %>
+            </div>
+
+          </div>
+        </div>
+      </div>
+<% end %>
+<%#-----------------------------------------------------------------------%>
+  <div class="frame">
+
+    <% @ideas.each do |idea| %>
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-plus-circle"></i>
+          <i class="fa fa-minus-circle hide"></i>
+          <%= link_to idea.title, idea_path(idea), class: "linkStyle" %>
+        </div>
+        <div class="card-body hide">
+          <p class="card-text"> <%= idea.description %> </p>
+            <i class="fa fa-user-o"></i><small>  <%= idea.user.full_name %></small>
+
+
+            <% if user_signed_in? && idea.joined_by?(current_user) %>
+              <%= link_to "Not Join", idea_join_path(idea, idea.join_for(current_user)), class: "btn btn-outline-dark btn-sm", method: :delete %>
+            <% else %>
+              <%= link_to "Join", idea_joins_path(idea), class: "btn btn-outline-warning btn-sm", method: :post   %>
+            <% end %>
+
+            <% if user_signed_in? && idea.liked_by?(current_user) %>
+              <%= link_to "Dislike", idea_like_path(idea, idea.like_for(current_user)), class: "btn btn-outline-dark btn-sm", method: :delete %>
+            <% else %>
+              <%= link_to "Like", idea_likes_path(idea), class: "btn btn-outline-danger btn-sm", method: :post   %>
+            <% end %>
+
+            <small class="float-right">
+              <i class="fa fa-address-book text-info"></i>
+              <%= idea.joins.count %>
+              &nbsp&nbsp&nbsp&nbsp&nbsp
+              <i class="fa fa-heart text-danger"></i>
+              <%= idea.likes.count %></small>
+
+
+
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
